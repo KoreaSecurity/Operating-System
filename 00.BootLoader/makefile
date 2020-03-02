@@ -1,10 +1,3 @@
-
-# file		makefile
-# date		2020/02/19
-# author	bbkim 
-# brief		Chapter04. OS 이미지를 빌드하기 위한 make 파일
-# brief		부트 로더를 빌드하기 위한 make 파일
-
 # 기본적으로 빌드를 수행할 목록
 all: BootLoader.bin
 
