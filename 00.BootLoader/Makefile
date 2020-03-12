@@ -1,8 +1,7 @@
-
 # file		makefile
-# date		2020/02/19
-# author	bbkim 
-# brief		Chapter04. OS 이미지를 빌드하기 위한 make 파일
+# date		2020/03/10
+# author	sanghoon-choi
+# brief		Chapter06. 
 # brief		부트 로더를 빌드하기 위한 make 파일
 
 # 기본적으로 빌드를 수행할 목록
