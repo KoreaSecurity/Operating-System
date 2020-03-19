@@ -2,23 +2,20 @@ import sys,os
 BYTESOFSECTOR=512
 import shutil
 def CopyFile(iSourcefd,iTargetFd):    
-    iSourceFileSize=0
-    #shutil.copy2(iSourcefd,iTargetFd)
+    iSourceFileSize=0    
     while(True):
         iBuf=iSourcefd.read(BYTESOFSECTOR)
-        iWrite=iTargetFd.write(iBuf)
-        #print(iBuf)
-        #print(iWrite)
+        
+        iWrite=iTargetFd.write(iBuf)        
+  
         if (iWrite==-1):        
             print("ERORR")
             exit(-1)        
         iSourceFileSize+=int(iWrite)
-        if (iBuf!=BYTESOFSECTOR):
+        if (not iBuf):
             break
     return iSourceFileSize
     
-    #return os.path.getsize(iTargetFd)
-
 def WriteKernellnformation(iTargetFd,iKerne132SectorCount):
     usData=0
     IPostion=iTargetFd.seek(1) #System align
@@ -37,17 +34,19 @@ def WriteKernellnformation(iTargetFd,iKerne132SectorCount):
 def AdjustInSEctorSize(iSourcefd,iTargetFd,iSourceSize):
     i=0
     iAdjustSzieToSector=0
-    cCh=0x00
+    cCh=0x00    
     iSectorCount=iSourceSize%BYTESOFSECTOR
+    
     if (iAdjustSzieToSector!=0):
         iAdjustSzieToSector = BYTESOFSECTOR - iAdjustSzieToSector
+        
         print("[INFO] FIsize {0} and fill {1} byte".format(iSourcefd,iAdjustSzieToSector))        
         for v in range(0,iAdjustSzieToSector):
             iSourcefd.write(cCh)
     else:
         print( "[INFO] File size is aligned 512 byte")
-    iSectorCount = (iSectorCount+iAdjustSzieToSector)/BYTESOFSECTOR
-    return iSectorCount
+    iSectorCount = (iSourceSize+iAdjustSzieToSector)/BYTESOFSECTOR
+    return int(iSectorCount)
     
 def error_print(msg):
     print("[ERRoR] \t"+str(msg))
@@ -83,7 +82,7 @@ def main(option):
     print( "[INFO] Start to write kernel information" )
 
     WriteKernellnformation(iTargetFd,iKernel32SectorCount)
-    print( "[INFO] Image file create complet" )
+    print( "[INFO] Image file create complete")
     iTargetFd.close()
     
 main(sys.argv)
