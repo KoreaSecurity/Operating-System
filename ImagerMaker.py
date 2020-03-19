@@ -18,13 +18,7 @@ def CopyFile(iSourcefd,iTargetFd):
     
 def WriteKernellnformation(iTargetFd,iKerne132SectorCount):
     usData=0
-    IPostion=iTargetFd.seek(1) #System align
-    
-    #buf=iTargetFd.read(1)
-    #iTargetFd.close()
-    #iTargetFd=open("Disk.img",'wb')    
-    #IPostion=iTargetFd.seek(7)
-    #print(iKerne132SectorCount)
+    IPostion=iTargetFd.seek(7) #System align
     if (IPostion==-1):
         error_print("seek fail")
     usData=int(iKerne132SectorCount)    
